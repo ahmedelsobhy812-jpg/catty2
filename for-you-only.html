@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style2.css">
+</head>
+
+<body>
+    
+<div class="kitty-bg"></div>
+
+<!-- الظرف -->
+<div class="envelope" onclick="openLetter()">
+    💌
+</div>
+
+<!-- الرسالة -->
+<div class="letter" id="letter">
+   <h1 style="color:#ff6f91;">الماسيدج دي من قلبي</h1>
+
+   <p id="messageText">
+    إنتي مش مجرد صديقة… إنتي حتة من قلبي 
+   </p>
+
+    <!-- أزرار الصوت -->
+    <div class="buttons">
+        <button onclick="toggleVoice()" id="voiceBtn">البسي الاير بودز واسمعي</button>
+        <button onclick="toggleSong()" id="songBtn">الاغنيه دي عشانك</button>
+    </div>
+
+    <!-- الفقاعة بتاعة الفيديو -->
+    <div class="video-bubble" onclick="openVideo()">
+        ▶
+    </div>
+</div>
+
+<!-- الفيديو popup -->
+<div class="video-popup" id="videoPopup">
+    <div class="video-box">
+
+        <span class="close" onclick="closeVideo()">✖</span>
+
+        <video controls id="videoPlayer">
+            <source src="video.mp4" type="video/mp4">
+        </video>
+
+    </div>
+</div>
+
+<script src="script2.js"></script>
+</body>
+</html>

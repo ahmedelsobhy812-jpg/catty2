@@ -1,0 +1,199 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Cairo', sans-serif;
+}
+
+body {
+    height: 100vh;
+    background: linear-gradient(135deg, #ffe4ec, #ffc1d3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #5a2a3b;
+    padding: 20px;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: 0.5s ease;
+}
+
+.container {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.4);
+    padding: 40px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(255, 105, 135, 0.2);
+    animation: fadeIn 2s ease;
+
+    width: 100%;
+    max-width: 520px; /* زوّدنا العرض عشان يناسب العنوان */
+    margin: auto;
+}
+
+h1 {
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700;
+    font-size: 3rem;
+    color: #d63384;
+    letter-spacing: 1px;
+    text-shadow: 0 3px 10px rgba(255, 105, 135, 0.25);
+}
+
+p {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+    font-weight: 300;
+    line-height: 1.8;
+}
+
+button {
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 30px;
+    background: #ff6f91;
+    color: white;
+    cursor: pointer;
+    
+    /* 3D effect */
+    box-shadow: 0 6px 0 #e05578, 0 10px 20px rgba(0,0,0,0.15);
+    transition: all 0.15s ease;
+}
+
+/* hover */
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 0 #e05578, 0 12px 25px rgba(0,0,0,0.2);
+}
+
+/* عند الضغط */
+button:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 #e05578, 0 5px 10px rgba(0,0,0,0.15);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container {
+    position: relative; /* مهم عشان يحدد مكان الصور جوه الكارد */
+}
+
+.kitty {
+    position: absolute;
+    width: 80px;
+    opacity: 0.95;
+    animation: float 3s ease-in-out infinite;
+    pointer-events: none; /* عشان متعطلش الضغط على الزرار */
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.15));
+}
+
+/* kitty1 فوق شمال */
+.top-left {
+    top: -15px;
+    left: -15px;
+}
+
+/* kitty2 تحت يمين */
+.bottom-right {
+    bottom: -15px;
+    right: -15px;
+}
+
+/* حركة بسيطة */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0px); }
+}
+
+.hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.heart {
+    position: absolute;
+    bottom: -20px;
+    width: 15px;
+    height: 15px;
+    background: pink;
+    transform: rotate(45deg);
+    animation: rise 6s linear infinite;
+}
+
+/* شكل القلب */
+.heart::before,
+.heart::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: pink;
+    border-radius: 50%;
+}
+
+.heart::before {
+    top: -7px;
+    left: 0;
+}
+
+.heart::after {
+    left: -7px;
+    top: 0;
+}
+
+/* الحركة */
+@keyframes rise {
+    0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) rotate(45deg);
+        opacity: 0;
+    }
+}
+
+
+/* المقاس للموبايل*/
+@media (max-width: 600px) {
+    body {
+        padding: 15px;
+    }
+
+    .container {
+        padding: 25px;
+        border-radius: 15px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    button {
+        width: 100%;
+    }
+}

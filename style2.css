@@ -1,0 +1,200 @@
+body {
+    margin: 0;
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(135deg, #ffe4ec, #ffc1d3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    position: relative;
+    z-index: 10;
+}
+
+/* الظرف */
+.envelope {
+    font-size: 80px;
+    cursor: pointer;
+    transition: all 0.6s ease;
+    transform-origin: center;
+}
+
+/* لما يتفتح */
+.envelope.open {
+    transform: scale(1.3) rotateX(90deg);
+    opacity: 0;
+}
+
+/* الرسالة */
+.letter {
+    display: none;
+    background: rgba(255,255,255,0.6);
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 400px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* أزرار الصوت */
+button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    background: #ff6f91;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+
+    /* 3D effect */
+    box-shadow: 0 6px 0 #e05578, 0 10px 20px rgba(0,0,0,0.15);
+    transition: all 0.15s ease;
+}
+
+/* hover */
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 0 #e05578, 0 12px 25px rgba(0,0,0,0.2);
+}
+
+/* click */
+button:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 #e05578;
+}
+
+/* الفقاعة */
+.video-bubble {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(145deg, #ff6f91, #ff3e6c);
+    border-radius: 50%;
+    margin: 20px auto 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+    cursor: pointer;
+
+    /* 3D effect */
+    box-shadow:
+        0 6px 0 #d94b6a,
+        0 10px 18px rgba(0,0,0,0.2),
+        inset 0 2px 6px rgba(255,255,255,0.4);
+
+    animation: pulse 1.5s infinite;
+    transition: all 0.2s ease;
+}
+
+/* hover خفيف بدون ما نكسر الباقي */
+.video-bubble:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 8px 0 #d94b6a,
+        0 14px 22px rgba(0,0,0,0.25),
+        inset 0 2px 8px rgba(255,255,255,0.5);
+}
+
+/* click */
+.video-bubble:active {
+    transform: translateY(3px);
+    box-shadow:
+        0 3px 0 #d94b6a,
+        0 6px 12px rgba(0,0,0,0.2);
+}
+/* popup الفيديو */
+.video-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    justify-content: center;
+    align-items: center;
+}
+
+.video-box {
+    position: relative;
+    width: 90%;
+    max-width: 400px; /* 👈 كان 600px خليها أصغر */
+    max-height: 70vh;
+}
+
+video {
+    width: 100%;
+    max-height: 70vh;
+    border-radius: 15px;
+}
+
+/* زرار الإغلاق */
+.close {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: white;
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* animations */
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+#messageText::after {
+    content: "|";
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+.kitty-bg {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* الاستيكر */
+.kitty-sticker {
+    position: absolute;
+    width: 60px;
+    opacity: 0.9;
+    animation: floatRandom linear forwards;
+}
+
+/* حركة كرتونية */
+@keyframes floatRandom {
+    0% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    50% {
+        transform: translate(25px, -30px) rotate(10deg) scale(1.05);
+    }
+    100% {
+        transform: translate(-30px, -60px) rotate(-10deg) scale(1.1);
+        opacity: 0;
+    }
+}
