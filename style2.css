@@ -2,15 +2,19 @@ body {
     margin: 0;
     font-family: 'Cairo', sans-serif;
     background: linear-gradient(135deg, #ffe4ec, #ffc1d3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
 
-.container {
-    position: relative;
-    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;  /* 👈 يخليه في النص عمودي */
+    
+
+    min-height: 100vh;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    padding: 60px 15px;
 }
 
 /* الظرف */
@@ -19,47 +23,83 @@ body {
     cursor: pointer;
     transition: all 0.6s ease;
     transform-origin: center;
+
+    margin-bottom: 30px;
 }
 
-/* لما يتفتح */
 .envelope.open {
     transform: scale(1.3) rotateX(90deg);
     opacity: 0;
 }
 
-/* الرسالة */
-.letter {
+/* ===== الكاردات ===== */
+.letter,
+.second-card {
+
     display: none;
-    background: rgba(255,255,255,0.6);
-    padding: 30px;
-    border-radius: 20px;
+
     text-align: center;
-    max-width: 400px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+
+    background: rgba(255, 255, 255, 0.45);
+
+    padding: 35px 25px;
+
+    border-radius: 22px;
+
+    backdrop-filter: blur(12px);
+
+    box-shadow: 0 10px 30px rgba(255, 105, 135, 0.2);
+
+    width: 100%;
+    max-width: 520px;
+
+    margin: 20px auto;
+
+    position: relative;
+    z-index: 10;
+
+    animation: fadeUp 0.6s ease;
+}
+
+/* الكارد التاني */
+.second-card {
+    margin-top: 25px;
+}
+
+/* النصوص */
+.letter h1,
+.second-card h1 {
+    font-size: 1.4rem;
+}
+
+.letter p,
+.second-card p {
+    font-size: 1rem;
+    line-height: 1.9;
+    color: #444;
 }
 
 /* أزرار الصوت */
 button {
-    padding: 12px 25px;
+    padding: 12px 22px;
     border: none;
     border-radius: 25px;
     background: #ff6f91;
     color: white;
-    font-size: 1rem;
+    font-size: 0.95rem;
     cursor: pointer;
 
-    /* 3D effect */
     box-shadow: 0 6px 0 #e05578, 0 10px 20px rgba(0,0,0,0.15);
     transition: all 0.15s ease;
+
+    margin: 5px;
 }
 
-/* hover */
 button:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 0 #e05578, 0 12px 25px rgba(0,0,0,0.2);
 }
 
-/* click */
 button:active {
     transform: translateY(4px);
     box-shadow: 0 2px 0 #e05578;
@@ -80,74 +120,68 @@ button:active {
     color: white;
     cursor: pointer;
 
-    /* 3D effect */
     box-shadow:
         0 6px 0 #d94b6a,
         0 10px 18px rgba(0,0,0,0.2),
         inset 0 2px 6px rgba(255,255,255,0.4);
 
     animation: pulse 1.5s infinite;
-    transition: all 0.2s ease;
 }
 
-/* hover خفيف بدون ما نكسر الباقي */
-.video-bubble:hover {
-    transform: translateY(-2px);
-    box-shadow:
-        0 8px 0 #d94b6a,
-        0 14px 22px rgba(0,0,0,0.25),
-        inset 0 2px 8px rgba(255,255,255,0.5);
-}
-
-/* click */
-.video-bubble:active {
-    transform: translateY(3px);
-    box-shadow:
-        0 3px 0 #d94b6a,
-        0 6px 12px rgba(0,0,0,0.2);
-}
 /* popup الفيديو */
 .video-popup {
     display: none;
     position: fixed;
     top: 0;
     left: 0;
+
     width: 100%;
     height: 100%;
+
     background: rgba(0,0,0,0.7);
+
     justify-content: center;
     align-items: center;
+    z-index: 999;
 }
 
 .video-box {
-    position: relative;
-    width: 90%;
-    max-width: 400px; /* 👈 كان 600px خليها أصغر */
-    max-height: 70vh;
+    width: 85%;
+    max-width: 320px;  /* 👈 أصغر من قبل */
+    max-height: 60vh;  /* 👈 يقلل الارتفاع */
 }
 
 video {
     width: 100%;
-    max-height: 70vh;
+    max-height: 60vh;
     border-radius: 15px;
 }
 
-/* زرار الإغلاق */
-.close {
+/* الكيتي */
+.kitty-bg {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.kitty-sticker {
     position: absolute;
-    top: -10px;
-    right: -10px;
-    background: white;
-    padding: 8px;
-    border-radius: 50%;
-    cursor: pointer;
+    width: 60px;
+    opacity: 0.9;
+    animation: floatRandom linear forwards;
 }
 
 /* animations */
-@keyframes float {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0); }
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes pulse {
@@ -156,45 +190,103 @@ video {
     100% { transform: scale(1); }
 }
 
-#messageText::after {
-    content: "|";
-    animation: blink 0.7s infinite;
-}
-
 @keyframes blink {
     50% { opacity: 0; }
 }
 
-.kitty-bg {
-    position: fixed;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-    z-index: 0;
-}
-
-/* الاستيكر */
-.kitty-sticker {
-    position: absolute;
-    width: 60px;
-    opacity: 0.9;
-    animation: floatRandom linear forwards;
-}
-
-/* حركة كرتونية */
 @keyframes floatRandom {
     0% {
         transform: translate(0, 0) rotate(0deg) scale(1);
         opacity: 0;
     }
-    20% {
-        opacity: 1;
-    }
+    20% { opacity: 1; }
     50% {
         transform: translate(25px, -30px) rotate(10deg) scale(1.05);
     }
     100% {
         transform: translate(-30px, -60px) rotate(-10deg) scale(1.1);
         opacity: 0;
+    }
+}
+
+.video-box {
+    position: relative;
+}
+
+/* زر الإغلاق */
+.close {
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    transform: translate(50%, -50%); /* 👈 يخليه راكب على الحافة */
+
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: white;
+    color: #ff3e6c;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+
+    z-index: 1000;
+}
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 30px 14px; /* 👈 أهم حاجة: مسافة من الجوانب */
+    }
+
+    .letter,
+    .second-card {
+
+        width: 100%;
+        max-width: 100%;
+
+        margin: 14px 0; /* 👈 مسافة بين الكاردات */
+
+        padding: 22px 16px;
+
+        box-sizing: border-box;
+
+        border-radius: 18px;
+    }
+
+    /* فرق إضافي بين الكاردين */
+    .second-card {
+        margin-top: 25px;
+    }
+
+    /* الظرف */
+    .envelope {
+        font-size: 55px;
+        margin-bottom: 20px;
+    }
+
+    /* النص */
+    .letter p,
+    .second-card p {
+        font-size: 0.9rem;
+        line-height: 1.7;
+    }
+
+    /* الأزرار */
+    button {
+        width: 100%;
+        margin: 6px 0;
+        font-size: 0.9rem;
     }
 }
